@@ -1,9 +1,9 @@
 // Requiring path to so we can use relative routes to our HTML files
 var path = require("path");
-const router = require("express").Router();
+const app = require("express").Router();
 
 
-module.exports = function(app) {
+//module.exports = function(app) {
   app.get("/", (req,res) => {
     res.sendFile(path.join(__dirname, '../public', 'index.html'));
     console.log ('Sending index.html');
@@ -17,4 +17,6 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, '../public', 'stats.html'));
     console.log ('Sending stats.html');
   });
-};
+// };
+
+module.exports = app;

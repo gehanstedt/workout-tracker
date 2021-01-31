@@ -43,8 +43,6 @@ router.post("/api/workouts", (req, res) => {
     });
 });
 
-
-
 router.post("/api/transaction/bulk", ({ body }, res) => {
   Transaction.insertMany(body)
     .then(dbTransaction => {
@@ -56,12 +54,16 @@ router.post("/api/transaction/bulk", ({ body }, res) => {
 });
 
 router.get("/api/workouts", (req, res) => {
-  Workout.findOne({})
+  console.log (`In GET /api/workouts`);
+  Workout.find({})
     .sort({ date: -1 })
-    .then(dbTransaction => {
-      res.json(dbTransaction);
+    .limit(1)
+    .then(dbWorkout => {
+      console.log (dbWorkout);
+      res.json(dbWorkout);
     })
     .catch(err => {
+      console.log (`No workouts found`)
       res.status(400).json(err);
     });
 });
