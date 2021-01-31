@@ -43,21 +43,25 @@ router.post("/api/workouts", (req, res) => {
     });
 });
 
-router.post("/api/transaction/bulk", ({ body }, res) => {
-  Transaction.insertMany(body)
-    .then(dbTransaction => {
-      res.json(dbTransaction);
+router.get("/api/workouts", (req, res) => {
+  console.log (`In GET /api/workouts`);
+  //Using find instead of findAll so we return an array with one object instead of just an object
+  Workout.find({})
+    .sort({ date: -1 })
+    .limit(1)
+    .then(dbWorkout => {
+      console.log (dbWorkout);
+      res.json(dbWorkout);
     })
     .catch(err => {
+      console.log (`No workouts found`)
       res.status(400).json(err);
     });
 });
 
-router.get("/api/workouts", (req, res) => {
-  console.log (`In GET /api/workouts`);
+router.get("/api/workouts/range", (req, res) => {
+  console.log (`In GET /api/workouts/range`);
   Workout.find({})
-    .sort({ date: -1 })
-    .limit(1)
     .then(dbWorkout => {
       console.log (dbWorkout);
       res.json(dbWorkout);
