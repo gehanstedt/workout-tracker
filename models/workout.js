@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
+// Workout Schema
+// A workout will contain the day, an array of zero or more exericses
+//
+// Each exercise in the array can each have a name, type, weight, sets,
+// reps, duration and distance
 const workoutSchema = new Schema({
   day: {
     type: Date,
